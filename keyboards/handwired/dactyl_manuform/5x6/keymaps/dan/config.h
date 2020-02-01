@@ -24,11 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define EE_HANDS
 // Rows are doubled-up
 
-/*
-Additionally, you may want to specify which key to use.
-This is especially useful for keyboards that have unusual matrices.
-To do so, you need to specify the row and column of the key that you want to use.
-Add these entries to your config.h file:
-*/
+// When powering up the board you can hold the 0/1 key (top left plus one to the right)
+// to put the board into DFU mode so it can be updated
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 1
