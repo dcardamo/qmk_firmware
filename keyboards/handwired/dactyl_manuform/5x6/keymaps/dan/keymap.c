@@ -11,29 +11,76 @@
 
 // Start of macro support
 enum custom_keycodes {
-  GOLET = SAFE_RANGE,
-  MT_LGUI_LPRN
+  GOLET = SAFE_RANGE,  // For golang:  ':='
+  MT_LGUI_LBRC, // Left GUI hold, tap = {
+  LT_RAISE_LPRN, // RAISE on hold, tap = '('
+  MT_RGUI_RBRC, // Right GUI hold, tap = }
+  LT_LOWER_RPRN // LOWER on hold, tap = ')'
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t my_mt_lgui_lprn_timer;
+  static uint16_t my_mt_lgui_lbrc_timer;
+  static uint16_t my_lt_raise_lprn_timer;
+  static uint16_t my_mt_rgui_rbrc_timer;
+  static uint16_t my_lt_lower_rprn_timer;
 
   switch (keycode) {
     case GOLET:
-    if (record->event.pressed) {
-      SEND_STRING(":=");
-    }
-    return false; // keypress handled
-    case MT_LGUI_LPRN:
-    if (record->event.pressed) {
-      my_mt_lgui_lprn_timer = timer_read();
-      register_code(KC_LGUI);
-    } else {
-      unregister_code(KC_LGUI);
-      if (timer_elapsed(my_mt_lgui_lprn_timer) < TAPPING_TERM) {
-        SEND_STRING("(");
+      if (record->event.pressed) {
+        SEND_STRING(":=");
       }
-    }
-    return false; // keypress handled
+      return false; // keypress handled
+    case MT_LGUI_LBRC:
+      if (record->event.pressed) {
+        my_mt_lgui_lbrc_timer = timer_read();
+        register_code(KC_LGUI);
+      } else {
+        unregister_code(KC_LGUI);
+        if (timer_elapsed(my_mt_lgui_lbrc_timer) < TAPPING_TERM) {
+          SEND_STRING("{");
+        }
+      }
+      return false; // keypress handled
+    case LT_RAISE_LPRN:
+      if (record->event.pressed) {
+        my_lt_raise_lprn_timer = timer_read();
+        layer_off(_QWERTY);
+        layer_off(_LOWER);
+        layer_on(_RAISE);
+      } else {
+        layer_off(_RAISE);
+        layer_off(_LOWER);
+        layer_on(_QWERTY);
+        if (timer_elapsed(my_lt_raise_lprn_timer) < TAPPING_TERM) {
+          SEND_STRING("(");
+        }
+      }
+      return false; // keypress handled
+     case MT_RGUI_RBRC:
+      if (record->event.pressed) {
+        my_mt_rgui_rbrc_timer = timer_read();
+        register_code(KC_RGUI);
+      } else {
+        unregister_code(KC_RGUI);
+        if (timer_elapsed(my_mt_rgui_rbrc_timer) < TAPPING_TERM) {
+          SEND_STRING("}");
+        }
+      }
+      return false; // keypress handled
+    case LT_LOWER_RPRN:
+      if (record->event.pressed) {
+        my_lt_lower_rprn_timer = timer_read();
+        layer_off(_QWERTY);
+        layer_off(_RAISE);
+        layer_on(_LOWER);
+      } else {
+        layer_off(_RAISE);
+        layer_off(_LOWER);
+        layer_on(_QWERTY);
+        if (timer_elapsed(my_lt_lower_rprn_timer) < TAPPING_TERM) {
+          SEND_STRING(")");
+        }
+      }
+      return false; // keypress handled
   }
   return true;
 };
@@ -46,8 +93,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  ,                         KC_N  , KC_M  ,KC_COMM,KC_DOT ,KC_SLSH,KC_BSLASH,
                       KC_LBRC,KC_RBRC,                                                       KC_PLUS, KC_EQL,
                          MT(MOD_LSFT, KC_ESC),KC_BSPC,                        KC_SPC, MT(MOD_RCTL, KC_ENT),  // enter when tapped, control when held
-                                       RAISE ,LOWER  ,                        _______, LOWER,
-                                 MT_LGUI_LPRN,KC_LALT,                        _______, _______
+                                 LT_RAISE_LPRN ,LOWER,                        _______, LT_LOWER_RPRN,
+                   MT_LGUI_LBRC,MT(MOD_LALT, KC_LBRC),                        KC_RBRC, MT_RGUI_RBRC
   ),
 
   [_LOWER] = LAYOUT_5x6(
