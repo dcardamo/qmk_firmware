@@ -28,3 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // to put the board into DFU mode so it can be updated
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 1
+
+// the length in milliseconds to treat as a tap or a hold
+// https://thomasbaart.nl/2018/12/09/qmk-basics-tap-and-hold-actions/
+#define TAPPING_TERM (200)
