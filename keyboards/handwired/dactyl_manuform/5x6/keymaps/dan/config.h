@@ -31,4 +31,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // the length in milliseconds to treat as a tap or a hold
 // https://thomasbaart.nl/2018/12/09/qmk-basics-tap-and-hold-actions/
-#define TAPPING_TERM (200)
+#define TAPPING_TERM (150) // 200ms is the default

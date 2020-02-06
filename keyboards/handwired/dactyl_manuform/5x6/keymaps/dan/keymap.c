@@ -9,7 +9,7 @@
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
 
-// Start of macro support
+// Custom keycodes can be mapped into the keycodes table
 enum custom_keycodes {
   GOLET = SAFE_RANGE,  // For golang:  ':='
   MT_LGUI_LBRC, // Left GUI hold, tap = {
@@ -17,6 +17,8 @@ enum custom_keycodes {
   MT_RGUI_RBRC, // Right GUI hold, tap = }
   LT_LOWER_RPRN // LOWER on hold, tap = ')'
 };
+
+// When clicks happen this function takes care of custom handling
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t my_mt_lgui_lbrc_timer;
   static uint16_t my_lt_raise_lprn_timer;
@@ -93,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  ,                         KC_N  , KC_M  ,KC_COMM,KC_DOT ,KC_SLSH,KC_BSLASH,
                       KC_LBRC,KC_RBRC,                                                       KC_PLUS, KC_EQL,
                          MT(MOD_LSFT, KC_ESC),KC_BSPC,                        KC_SPC, MT(MOD_RCTL, KC_ENT),  // enter when tapped, control when held
-                                 LT_RAISE_LPRN ,LOWER,                        _______, LT_LOWER_RPRN,
+                    LT_RAISE_LPRN ,LT(LOWER, KC_LBRC),                        KC_RBRC, LT_LOWER_RPRN,
                    MT_LGUI_LBRC,MT(MOD_LALT, KC_LBRC),                        KC_RBRC, MT_RGUI_RBRC
   ),
 
@@ -101,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      //  this side is for misc stuff                                         // This is the numpad
      _______,_______,_______,_______,_______,_______,                        KC_CIRC,KC_AMPR,KC_ASTR,KC_LPRN,KC_RPRN,KC_DEL,
      _______,_______,_______,_______,_______,_______,                        KC_RBRC, KC_P7 , KC_P8 , KC_P9 ,_______,KC_PLUS,
-     _______,KC_HOME,KC_PGUP,KC_PGDN,KC_END ,_______,                        KC_RPRN, KC_P4 , KC_P5 , KC_P6 ,KC_MINS,KC_PIPE,
+     _______,_______,KC_HOME,KC_PGUP,KC_PGDN,KC_END ,                        KC_RPRN, KC_P4 , KC_P5 , KC_P6 ,KC_MINS,KC_PIPE,
      _______,_______,_______,_______,_______,_______,                        KC_NLCK, KC_P1 , KC_P2 , KC_P3 ,KC_EQL ,KC_UNDS,
                                              _______,_______,            _______, KC_P0,
                                              _______,_______,            _______,_______,
@@ -122,4 +124,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                _______,_______,            _______,_______
   ),
 };
-
