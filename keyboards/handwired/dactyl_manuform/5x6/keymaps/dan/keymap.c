@@ -1,7 +1,6 @@
 /* A standard layout for the Dactyl Manuform 5x6 Keyboard */
 #include QMK_KEYBOARD_H
 
-
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
@@ -11,82 +10,98 @@
 
 // Custom keycodes can be mapped into the keycodes table
 enum custom_keycodes {
-  GOLET = SAFE_RANGE,  // For golang:  ':='
-  MT_LGUI_LBRC, // Left GUI hold, tap = {
-  LT_RAISE_LPRN, // RAISE on hold, tap = '('
-  MT_RGUI_RBRC, // Right GUI hold, tap = }
-  LT_LOWER_RPRN // LOWER on hold, tap = ')'
+    GOLET = SAFE_RANGE,  // For golang:  ':='
+    MT_LGUI_LBRC,        // Left GUI hold, tap = {
+    LT_RAISE_LPRN,       // RAISE on hold, tap = '('
+    MT_RGUI_RBRC,        // Right GUI hold, tap = }
+    LT_LOWER_RPRN        // LOWER on hold, tap = ')'
 };
 
 // When clicks happen this function takes care of custom handling
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t my_mt_lgui_lbrc_timer;
-  static uint16_t my_lt_raise_lprn_timer;
-  static uint16_t my_mt_rgui_rbrc_timer;
-  static uint16_t my_lt_lower_rprn_timer;
+    static uint16_t my_mt_lgui_lbrc_timer;
+    static uint16_t my_lt_raise_lprn_timer;
+    static uint16_t my_mt_rgui_rbrc_timer;
+    static uint16_t my_lt_lower_rprn_timer;
 
-  switch (keycode) {
-    case GOLET:
-      if (record->event.pressed) {
-        SEND_STRING(":=");
-      }
-      return false; // keypress handled
-    case MT_LGUI_LBRC:
-      if (record->event.pressed) {
-        my_mt_lgui_lbrc_timer = timer_read();
-        register_code(KC_LGUI);
-      } else {
-        unregister_code(KC_LGUI);
-        if (timer_elapsed(my_mt_lgui_lbrc_timer) < TAPPING_TERM) {
-          SEND_STRING("{");
-        }
-      }
-      return false; // keypress handled
-    case LT_RAISE_LPRN:
-      if (record->event.pressed) {
-        my_lt_raise_lprn_timer = timer_read();
-        layer_off(_QWERTY);
-        layer_off(_LOWER);
-        layer_on(_RAISE);
-      } else {
-        layer_off(_RAISE);
-        layer_off(_LOWER);
-        layer_on(_QWERTY);
-        if (timer_elapsed(my_lt_raise_lprn_timer) < TAPPING_TERM) {
-          SEND_STRING("(");
-        }
-      }
-      return false; // keypress handled
-     case MT_RGUI_RBRC:
-      if (record->event.pressed) {
-        my_mt_rgui_rbrc_timer = timer_read();
-        register_code(KC_RGUI);
-      } else {
-        unregister_code(KC_RGUI);
-        if (timer_elapsed(my_mt_rgui_rbrc_timer) < TAPPING_TERM) {
-          SEND_STRING("}");
-        }
-      }
-      return false; // keypress handled
-    case LT_LOWER_RPRN:
-      if (record->event.pressed) {
-        my_lt_lower_rprn_timer = timer_read();
-        layer_off(_QWERTY);
-        layer_off(_RAISE);
-        layer_on(_LOWER);
-      } else {
-        layer_off(_RAISE);
-        layer_off(_LOWER);
-        layer_on(_QWERTY);
-        if (timer_elapsed(my_lt_lower_rprn_timer) < TAPPING_TERM) {
-          SEND_STRING(")");
-        }
-      }
-      return false; // keypress handled
-  }
-  return true;
+    switch (keycode) {
+        case GOLET:
+            if (record->event.pressed) {
+                SEND_STRING(":=");
+            }
+            return false;  // keypress handled
+        case MT_LGUI_LBRC:
+            if (record->event.pressed) {
+                my_mt_lgui_lbrc_timer = timer_read();
+                register_code(KC_LGUI);
+            } else {
+                unregister_code(KC_LGUI);
+                if (timer_elapsed(my_mt_lgui_lbrc_timer) < TAPPING_TERM) {
+                    SEND_STRING("{");
+                }
+            }
+            return false;  // keypress handled
+        case LT_RAISE_LPRN:
+            if (record->event.pressed) {
+                my_lt_raise_lprn_timer = timer_read();
+                layer_off(_QWERTY);
+                layer_off(_LOWER);
+                layer_on(_RAISE);
+            } else {
+                layer_off(_RAISE);
+                layer_off(_LOWER);
+                layer_on(_QWERTY);
+                if (timer_elapsed(my_lt_raise_lprn_timer) < TAPPING_TERM) {
+                    SEND_STRING("(");
+                }
+            }
+            return false;  // keypress handled
+        case MT_RGUI_RBRC:
+            if (record->event.pressed) {
+                my_mt_rgui_rbrc_timer = timer_read();
+                register_code(KC_RGUI);
+            } else {
+                unregister_code(KC_RGUI);
+                if (timer_elapsed(my_mt_rgui_rbrc_timer) < TAPPING_TERM) {
+                    SEND_STRING("}");
+                }
+            }
+            return false;  // keypress handled
+        case LT_LOWER_RPRN:
+            if (record->event.pressed) {
+                my_lt_lower_rprn_timer = timer_read();
+                layer_off(_QWERTY);
+                layer_off(_RAISE);
+                layer_on(_LOWER);
+            } else {
+                layer_off(_RAISE);
+                layer_off(_LOWER);
+                layer_on(_QWERTY);
+                if (timer_elapsed(my_lt_lower_rprn_timer) < TAPPING_TERM) {
+                    SEND_STRING(")");
+                }
+            }
+            return false;  // keypress handled
+    }
+    return true;
 };
 
+/* Leader support
+LEADER_EXTERNS();
+void matrix_scan_user(void) {
+    LEADER_DICTIONARY() {
+        leading = false;
+        leader_end();
+
+        SEQ_ONE_KEY(KC_S) {
+            // Anything you can do in a macro.
+            SEND_STRING("spotify");
+        }
+    }
+}
+*/
+
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_QWERTY] = LAYOUT_5x6(
      _______, KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                         KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,_______,
@@ -105,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______,_______,_______,_______,_______,_______,                        KC_RBRC, KC_P7 , KC_P8 , KC_P9 ,_______,KC_PLUS,
      _______,_______,KC_HOME,KC_PGUP,KC_PGDN,KC_END ,                        KC_RPRN, KC_P4 , KC_P5 , KC_P6 ,KC_MINS,KC_PIPE,
      _______,_______,_______,_______,_______,_______,                        KC_NLCK, KC_P1 , KC_P2 , KC_P3 ,KC_EQL ,KC_UNDS,
-                                             _______,_______,            _______, KC_P0,
+                                             _______,KC_DEL ,            _______, KC_P0,
                                              _______,_______,            _______,_______,
                                              _______,_______,            _______,_______,
                                              _______,_______,            _______,_______
@@ -124,3 +139,4 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                _______,_______,            _______,_______
   ),
 };
+// clang-format on
