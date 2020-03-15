@@ -24,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       KC_LBRC,KC_RBRC,                                                       KC_PLUS, KC_EQL,
                          MT(MOD_LSFT, KC_ESC),KC_BSPC,                        KC_SPC, MT(MOD_RCTL, KC_ENT),  // enter when tapped, control when held
                 //   LT_RAISE_LPRN ,LT(FUNCNUM, KC_LBRC),                        KC_RBRC, LT_LOWER_RPRN,
-                   KC_LGUI ,MOD_LALT,                                     _______, FUNCNUM,
+                   KC_LGUI ,KC_LALT,                                      _______, FUNCNUM,
                    _______ ,_______,                                      _______, _______
   ),
 
