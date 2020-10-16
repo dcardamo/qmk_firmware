@@ -19,7 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL
 
-#define MASTER_LEFT
+// This is how it has been for a while but has issues on startup where the slave side doesn't respond
+//#define MASTER_LEFT
+
+// New way
+#define SPLIT_USB_DETECT
+#define SPLIT_USB_TIMEOUT 2500
+
+// was always commented out
 // #define MASTER_RIGHT
 //#define EE_HANDS
 // Rows are doubled-up
