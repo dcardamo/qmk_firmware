@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define MASTER_LEFT
 
 // New way
+#define MASTER_RIGHT
 #define SPLIT_USB_DETECT
 #define SPLIT_USB_TIMEOUT 2500
 
