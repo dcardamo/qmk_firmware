@@ -6,10 +6,12 @@
 #define _RAISE 2
 #define _NUMPAD 3
 #define _FUNCNUM 4
+#define _GAMING 5
 
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
 #define FUNCNUM MO(_FUNCNUM)
+#define GAMING TG(_GAMING)
 #define NUMPAD TG(_NUMPAD)
 
 #include "process_keys.c"
@@ -17,7 +19,7 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_QWERTY] = LAYOUT_5x6(
-     _______, KC_1   , KC_2  , KC_3  , KC_4  , KC_5  ,                        KC_6  , KC_7  , KC_8  , KC_9  , KC_0  , KC_F12,
+     GAMING, KC_1   , KC_2  , KC_3  , KC_4  , KC_5  ,                        KC_6  , KC_7  , KC_8  , KC_9  , KC_0  , KC_F12,
      KC_GRV , KC_Q  , KC_W  , KC_E  , KC_R  , KC_T  ,                        KC_Y  , KC_U  , KC_I  , KC_O  , KC_P  ,KC_MINS,
      KC_TAB , KC_A  , KC_S  , KC_D  , KC_F  , KC_G  ,      KC_H  , KC_J  , KC_K  , KC_L  ,KC_SCLN,KC_QUOT,
      NUMPAD , KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  ,                        KC_N  , KC_M  ,KC_COMM,KC_DOT ,KC_SLSH,KC_BSLASH,
@@ -51,6 +53,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                _______,_______,            _______,_______,
                                                _______,_______,            _______,_______,
                                                _______,_______,            _______,_______
+  ),
+
+  [_GAMING] = LAYOUT_5x6(
+     GAMING, KC_0   , KC_1  , KC_2  , KC_3  , KC_4  ,                       _______,_______,_______,_______,_______,_______,
+     _______, KC_TAB, KC_Q  , KC_W  , KC_E  , KC_R  ,                       _______,_______,_______,_______,_______,_______,
+   _______,KC_LSHIFT, KC_A  , KC_S  , KC_D  , KC_F  ,                       _______,_______,_______,_______,_______,_______,
+    _______,KC_LCTRL, KC_Z  , KC_C  , KC_V  , KC_B  ,                       _______,_______,_______,_______,_______,_______,
+                      _______,_______,                                      _______,_______,
+                      KC_M,KC_SPC,                                          _______,_______,
+                      KC_1,KC_2,                                            _______,_______,
+                      _______,_______,                                      _______,_______
   ),
 
   [_NUMPAD] = LAYOUT_5x6(
