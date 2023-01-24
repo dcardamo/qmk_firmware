@@ -1,5 +1,19 @@
 # DAN NOTES
 
+# Mac Setup
+
+`brew qmk/qmk/qmk`
+`qmk setup`
+
+## GMMK Pro
+My keymap is based off gourdo1
+`qmk compile -kb gmmk/pro/rev1/ansi -km dcardamo`
+
+## Dactyl Manuform
+
+
+# OLD Notes
+
 This repo has the firmware setup for my Dactyl Manuform keyboard.
 
 Flashing:
