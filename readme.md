@@ -9,6 +9,26 @@
 My keymap is based off gourdo1
 `qmk compile -kb gmmk/pro/rev1/ansi -km dcardamo`
 
+Enter bootmode by holding FN+\ while plugging in power
+
+### Notable keymaps
+Encoder:
+    LSHIFT+encoder = page up/down
+    RSHIFT+encoder = Layer Change
+    RCTRL+encoder = RGB Colour change
+    LCTRL+encoder = media next/prev
+    
+
+Function Key Combos:
+    FN+UP/DOWN = RGB mode change
+    FN+LEFT/RIGHT = RGB Colour Change
+    FN+WIN = Disable windows button.  Do it again to re-enable.
+    FN+DELETE = RGB Toggle
+    FN+PGUP = Media next
+    FN+PGDN = Media prev
+    FN+~ = print config as text
+    
+
 ## Dactyl Manuform
 
 

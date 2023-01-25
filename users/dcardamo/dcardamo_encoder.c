@@ -1,6 +1,6 @@
 /* Copyright 2021 Jonavin Eng @Jonavin
    Copyright 2022 gourdo1 <gourdo1@outlook.com>
-   
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
@@ -52,12 +52,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             }
         }
     }
-	
+
     void encoder_action_mediatrack(bool clockwise) {
         if (clockwise)
-            tap_code(KC_MEDIA_NEXT_TRACK);
+            tap_code(KC_MNXT); //next track
         else
-            tap_code(KC_MEDIA_PREV_TRACK);
+            tap_code(KC_MPRV);
     }
 
     void encoder_action_navword(bool clockwise) {
