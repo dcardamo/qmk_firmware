@@ -10,6 +10,7 @@ My keymap is based off gourdo1
 `qmk compile -kb gmmk/pro/rev1/ansi -km dcardamo`
 
 Enter bootmode by holding FN+\ while plugging in power
+If its the first time then use space+b to enter boot mode.
 
 ### Notable keymaps
 Encoder:
